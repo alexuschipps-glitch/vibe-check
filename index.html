@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vibe Check</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 40px; max-width: 760px; }
+    h1 { margin-bottom: 0; }
+    p { line-height: 1.5; }
+    button { padding: 12px 16px; font-size: 16px; cursor: pointer; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 18px; margin-top: 18px; background: #fafafa; }
+    .row { margin: 10px 0; }
+    .label { font-weight: 700; }
+    .meter { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <h1>Vibe Check</h1>
+  <p>Click for a random read + an action plan.</p>
+
+  <button id="btn">Hit me</button>
+
+  <div class="card" id="out" style="display:none;">
+    <div class="row"><span class="label">One-liner:</span> <span id="liner"></span></div>
+    <div class="row"><span class="label">Today’s move:</span> <span id="move"></span></div>
+    <div class="row"><span class="label">Do NOT:</span> <span id="dont"></span></div>
+    <div class="row"><span class="label">Confidence:</span> <span class="meter" id="conf"></span></div>
+  </div>
+
+  <script>
+    const liners = [
+      "Your aura is ‘board meeting in a nightclub.’",
+      "You’re calm, but the spreadsheet is judging everyone.",
+      "Main character energy, zero tolerance for nonsense.",
+      "You’re not cold — you’re just allergic to chaos.",
+      "Strategic. Slightly feral. Fully correct."
+    ];
+
+    const moves = [
+      "Do the one task that removes 80% of the stress.",
+      "Send the cleanest, shortest message possible and disappear.",
+      "Make a list. Cross off one thing. Feel superior.",
+      "Lift weights or take a long walk. Let your brain defrag.",
+      "Fix one process. Quietly become unstoppable."
+    ];
+
+    const donts = [
+      "Argue with someone committed to misunderstanding you.",
+      "Over-explain. They didn’t earn a TED Talk.",
+      "Make a decision while emotionally caffeinated.",
+      "Re-read texts for hidden meaning. It’s not that deep.",
+      "Volunteer for chaos just because you can handle it."
+    ];
+
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+    const bar = n => "█".repeat(Math.floor(n/10)) + "░".repeat(10 - Math.floor(n/10)) + ` ${n}%`;
+
+    document.getElementById("btn").addEventListener("click", () => {
+      const confidence = Math.floor(60 + Math.random()*41); // 60–100
+      document.getElementById("liner").textContent = pick(liners);
+      document.getElementById("move").textContent = pick(moves);
+      document.getElementById("dont").textContent = pick(donts);
+      document.getElementById("conf").textContent = bar(confidence);
+      document.getElementById("out").style.display = "block";
+    });
+  </script>
+</body>
+</html>
